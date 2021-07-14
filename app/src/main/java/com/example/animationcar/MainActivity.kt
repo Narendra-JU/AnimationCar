@@ -54,16 +54,21 @@ class MainActivity : AppCompatActivity() {
 			R.drawable.a36
 		)
 		imageView.setImageResource(R.drawable.a19)
+		testConstraints.bringToFront()
 
 
+		testConstraints.setOnTouchListener(object:OnSwipeTouchListener(this@MainActivity){
 
-		constraintlayout.setOnTouchListener(object:OnSwipeTouchListener(this@MainActivity){
 			override fun onSwipeRight() {
 				position+=1
 				if (position==36){
 					position=0
 				}
+				imageView.setZoomable(false)
+
 				imageView.setImageResource(listOfCars[position])
+
+				imageView.setZoomable(true)
 				super.onSwipeRight()
 			}
 
@@ -100,8 +105,8 @@ class MainActivity : AppCompatActivity() {
 					scaleUpX.duration = 1000
 					scaleUpY.duration = 1000
 
-					val scaleDownX = ObjectAnimator.ofFloat(imageView, "scaleX", 0.05f)
-					val scaleDownY = ObjectAnimator.ofFloat(imageView, "scaleY", 0.05f)
+					val scaleDownX = ObjectAnimator.ofFloat(imageView, "scaleX", 0.1f)
+					val scaleDownY = ObjectAnimator.ofFloat(imageView, "scaleY", 0.1f)
 					scaleDownX.duration = 2000
 					scaleDownY.duration = 2000
 
@@ -111,6 +116,7 @@ class MainActivity : AppCompatActivity() {
 					fadeOutSet.playTogether(scaleDownX, scaleDownY,fadeOut)
 					fadeOutSet.start()
 					fadeOutSet.addListener(object : AnimatorListenerAdapter() {
+
 						override fun onAnimationEnd(animation: Animator?) {
 							super.onAnimationEnd(animation)
 							imageView.setImageResource(R.drawable.a1)
@@ -153,6 +159,7 @@ class MainActivity : AppCompatActivity() {
 				}
 				super.onSwipeBottom()
 			}
+
 		})
 	}
 }
