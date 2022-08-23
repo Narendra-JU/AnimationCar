@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
 
 		var position=18
 
+
 		val listOfCars=mutableListOf(
 			R.drawable.a1,
 			R.drawable.a2,
